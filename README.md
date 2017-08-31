@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/ExampleDriven/spring-cloud-zuul-example.svg?branch=master)](https://travis-ci.org/ExampleDriven/spring-cloud-zuul-example)
+[![Build Status](https://travis-ci.org/hendisantika/spring-cloud-zuul.svg?branch=master)](https://travis-ci.org/hendisantika/spring-cloud-zuul)
 # spring-cloud-zuul-example
 
 This is the source code for the blog post
