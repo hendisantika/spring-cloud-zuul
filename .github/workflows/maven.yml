@@ -28,13 +28,13 @@ jobs:
         distribution: 'temurin'
         cache: maven
         
-    - name: Build with Maven
+    - name: Build with Maven for customer-service
       run: mvn -B package --file ./customer-service/pom.xml
 
-    - name: Build with Maven
+    - name: Build with Maven for eureka-server
       run: mvn -B package --file ./eureka-server/pom.xml
 
-    - name: Build with Maven
+    - name: Build with Maven for zuul-server
       run: mvn -B package --file ./zuul-server/pom.xml
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
