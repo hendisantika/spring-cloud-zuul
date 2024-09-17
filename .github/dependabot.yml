@@ -1,0 +1,30 @@
+version: 2
+updates:
+  - package-ecosystem: maven
+    directory: "/customer-service"
+    schedule:
+      interval: daily
+      time: ’05:00'
+      timezone: Asia/Jakarta
+    open-pull-requests-limit: 10
+  
+  - package-ecosystem: maven
+    directory: "/eureka-server"
+    schedule:
+      interval: daily
+      time: ’05:00'
+      timezone: Asia/Jakarta
+    open-pull-requests-limit: 10
+  
+  - package-ecosystem: maven
+    directory: "/zuul-server"
+    schedule:
+      interval: daily
+      time: ’05:00'
+      timezone: Asia/Jakarta
+    open-pull-requests-limit: 10
+    
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "daily"
