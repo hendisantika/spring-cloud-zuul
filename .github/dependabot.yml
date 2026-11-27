@@ -1,30 +1,60 @@
 version: 2
 updates:
+  # Maven: one config for every module so related bumps land in a single PR
   - package-ecosystem: maven
-    directory: "/customer-service"
+    directories:
+      - "/"
+      - "/customer-service"
+      - "/eureka-server"
+      - "/zuul-server"
     schedule:
       interval: daily
-      time: '05:00'
+      time: "05:00"
       timezone: Asia/Jakarta
     open-pull-requests-limit: 10
-  
-  - package-ecosystem: maven
-    directory: "/eureka-server"
-    schedule:
-      interval: daily
-      time: '05:00'
-      timezone: Asia/Jakarta
-    open-pull-requests-limit: 10
-  
-  - package-ecosystem: maven
-    directory: "/zuul-server"
-    schedule:
-      interval: daily
-      time: '05:00'
-      timezone: Asia/Jakarta
-    open-pull-requests-limit: 10
-    
-  - package-ecosystem: "github-actions"
+    labels:
+      - dependencies
+      - java
+    assignees:
+      - hendisantika
+    commit-message:
+      prefix: "chore(deps)"
+      include: scope
+    groups:
+      # Spring Boot parent must move together across all modules
+      spring-boot:
+        patterns:
+          - "org.springframework.boot*"
+      # Spring Cloud release train (BOM) must move together across all modules
+      spring-cloud:
+        patterns:
+          - "org.springframework.cloud*"
+      maven-plugins:
+        patterns:
+          - "org.apache.maven.plugins*"
+          - "*maven-plugin"
+      minor-and-patch:
+        update-types:
+          - minor
+          - patch
+
+  # GitHub Actions used by workflows
+  - package-ecosystem: github-actions
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: weekly
+      day: monday
+      time: "05:00"
+      timezone: Asia/Jakarta
+    open-pull-requests-limit: 5
+    labels:
+      - dependencies
+      - github_actions
+    assignees:
+      - hendisantika
+    commit-message:
+      prefix: "ci(deps)"
+    groups:
+      github-actions:
+        patterns:
+          - "*"
