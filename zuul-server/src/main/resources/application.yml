@@ -6,24 +6,20 @@ eureka:
     serviceUrl:
       defaultZone: http://127.0.0.1:8761/eureka/
 
-zuul:
-  #Service will be mapped under the /api URI
-  prefix: /api
-#  Uncomment to disable auto-registering all services read from Eureka
-#  ignoredServices: '*'
-  routes:
-    test:
-      path: /redirect/**
-      url: http://google.com
-    customer-by-address:
-      path: /customer-by-address/**
-      url: http://localhost:9098
-    customer-by-service:
-      path: /customer-by-service/**
-      serviceId: CUSTOMER-SERVICE
-    static:
-      path: /static/**
-
 spring:
   application:
     name: zuul-server
+
+# Routes are defined in com.hendisantika.zuul.config.GatewayRoutesConfig (all under the /api prefix)
+gateway:
+  routes:
+    customer-by-address:
+      url: http://localhost:9098
+    redirect:
+      url: https://example.com
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,mappings
